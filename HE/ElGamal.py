@@ -18,6 +18,7 @@ class ElGamalPublicKey(object):
     q 是奇素数
     g 是q的原根
     h = g ^ x % q
+    其中x集合于(1,q-1)
     # encrypt_int:
     # evaluate_int:
     '''
@@ -36,7 +37,9 @@ class ElGamalPublicKey(object):
         # 返回参数：密文C(c1, c2)
         '''
         y = random.randint(1, self.q - 1)
+        #c1为临时密钥
         c1 = powmod(self.g, y, self.q)
+        #s为自己与上一个投票者的联合密钥
         s = powmod(self.h, y, self.q)
         c2 = m * s % self.q
         return (c1, c2)

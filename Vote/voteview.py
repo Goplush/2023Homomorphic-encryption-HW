@@ -133,7 +133,7 @@ class EL_Voteview(QWidget):
 
                 m = m * int(data[1])
         if cnt == 0:
-            QMessageBox.warning(self, 'warning', '您选选择任何选项进行投票', QMessageBox.Yes)
+            QMessageBox.warning(self, 'warning', '您未选择任何选项进行投票', QMessageBox.Yes)
             return None                
         QMessageBox.information(self, '提示', '请准备好加载加密公钥', QMessageBox.Yes)
 
@@ -153,7 +153,7 @@ class EL_Voteview(QWidget):
 class PA_Voteview(QWidget):
     '''
     usr: 当前用户
-    title（str): 活动标题
+    title(str): 活动标题
     data(choice(str), tag(int)): 投票活动数据
     votelimt(int): 一个人最多可以投多少票
     '''
@@ -262,7 +262,7 @@ class PA_Voteview(QWidget):
 
                 m = m * int(data[1])
         if cnt == 0:
-            QMessageBox.warning(self, 'warning', '您选选择任何选项进行投票', QMessageBox.Yes)
+            QMessageBox.warning(self, 'warning', '您未选择任何选项进行投票', QMessageBox.Yes)
             return None
         QMessageBox.information(self, '提示', '请准备好加载加密公钥', QMessageBox.Yes)
 
