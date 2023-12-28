@@ -161,3 +161,6 @@ cython_debug/
 
 #contains config of database
 database_config.json
+
+#useless
+key/
