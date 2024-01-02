@@ -14,8 +14,7 @@ from PyQt5.QtWidgets import (QWidget, QWidget, QLabel, QLineEdit,
 from PyQt5.QtGui import QFont, QIcon, QPixmap
 
 import util
-import register
-import patternWindow
+
 import os 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/'+'..')) #当前python程序所在目录的父目录的绝对路径加入到环境变量PYTHON_PATH中
 from Database.util import login # PYTHON_PATH是python的搜索路径，再引入模块时就可以从父目录中搜索得到了

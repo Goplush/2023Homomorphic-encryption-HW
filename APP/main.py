@@ -296,7 +296,7 @@ class PA_MainWindow(QMainWindow):
         self.close()
 
 
-if __name__ == "__main__":
+def main():
     
     app = QApplication(sys.argv)
     loginWindow = login.LoginWindow()
@@ -305,15 +305,18 @@ if __name__ == "__main__":
     el_mainWindow = EL_MainWindow()
     pa_mainWindow = PA_MainWindow()
 
-    patternWindow = patternWindow.PatternWindow()
+    vPatternWindow = patternWindow.PatternWindow()
 
     # mainWindow.loginWindow = loginWindow
     registerWindow.loginWindow = loginWindow
     loginWindow.registerWindow = registerWindow
 
-    patternWindow.EL_MainWindow = el_mainWindow
-    patternWindow.PA_MainWindow = pa_mainWindow
-    loginWindow.patternWindow = patternWindow
+    vPatternWindow.EL_MainWindow = el_mainWindow
+    vPatternWindow.PA_MainWindow = pa_mainWindow
+    loginWindow.patternWindow = vPatternWindow
 
     loginWindow.show()
     sys.exit(app.exec_())
+
+if __name__=="__main__":
+    main()

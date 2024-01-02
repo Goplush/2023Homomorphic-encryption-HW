@@ -161,7 +161,7 @@ def load_key(filename, mode = 0):
 
 
 if __name__ == "__main__":
-    keysize = 2048
+    keysize = 1024
     pubname = './key/public_key_' + str(keysize) + '.txt'
     priname = './key/private_key_' + str(keysize) + '.txt'
 
@@ -180,3 +180,5 @@ if __name__ == "__main__":
     C2 = pubkey.encrypt_int(num2)
     ans = prikey.decrypt_int(pubkey.evaluate_int(C1, C2))
     print(ans == num1 * num2)
+
+    
