@@ -1,13 +1,14 @@
 import datetime
 import random, sys 
 import time
-from gmpy2 import mpz, powmod, f_div, invert, is_prime, random_state, mpz_urandomb, rint_round, log2, gcd 
+from gmpy2 import mpz, powmod, f_div, random_state, mpz_urandomb, gcd 
 import matplotlib.pyplot as plt
 
 
 import sys
 sys.path.append("..")
 import HE.paillier as paillier
+import HE.logger as logger
 
 
 def enc(pub, plain):
@@ -39,7 +40,7 @@ def dec(priv, pub, cipher):
 def enc_add(pub, m1, m2):
     """Add one encrypted integer to another"""
     return powmod(m1 * m2, 1, pub.n_sq)
-
+    
 def enc_add_const(pub, m, c):
     """Add a constant to an encrypted integer"""
     n_sq = pub.n_sq
@@ -49,7 +50,7 @@ def enc_mul_const(pub, m, c):
     """Multiply an encrypted integer by a constant"""
     return powmod(m, c, pub.n_sq)
 
-def test(mode, bit_len, priv, pub, log:Logger):
+def test(mode, bit_len, priv, pub, log:logger.Logger):
     rand = random_state(random.randrange(sys.maxsize))
 
     def generate_num(bit_len):
@@ -105,7 +106,7 @@ def integrated_testing():
     add_const_dec_times = []
     mul_const_enc_times = []
     mul_const_dec_times = []
-    log=Logger("../logs/paillier_test.log")
+    log=logger.Logger("../logs/paillier_test.log")
     log.open_log()
 
     for bit_len in range(10, 1000 + 10, 10):
