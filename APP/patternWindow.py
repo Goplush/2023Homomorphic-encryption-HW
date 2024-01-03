@@ -26,11 +26,12 @@ class PatternWindow(QWidget):
         self.PA_MainWindow = None
         self.registerWindow = None
         self.usr = usr
+        self.setFixedSize(645,306)
         self.initUI(usr)
 
     def initUI(self, parent):
         self.choosepatternbtn1 = QPushButton(self)
-        self.choosepatternbtn1.setText("ElGama乘法同态加密")
+        self.choosepatternbtn1.setText("Elgamal乘法同态加密")
         self.choosepatternbtn1.setFixedSize(200, 100)
         self.choosepatternbtn1.setStyleSheet("QPushButton{\n"
                                              "    background:orange;\n"

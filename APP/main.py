@@ -3,6 +3,8 @@
 '''
 应用窗口主程序
 '''
+
+
 import sys
 from PyQt5.QtCore import Qt 
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QLabel, QLineEdit,
@@ -22,6 +24,7 @@ from KeyGen.keyGen_pail import PA_KeyGenWindow
 from Launch.launch import EL_LaunchWindow,PA_LaunchWindow
 from Vote.vote import EL_VoteWindow,PA_VoteWindow
 from View.view import PA_ViewWindow,EL_ViewWindow
+from Test import test
 
 
 class EL_CenterWidget(QWidget):
@@ -123,7 +126,7 @@ class EL_MainWindow(QMainWindow):
         self.setCentralWidget(EL_CenterWidget(self))
 
         #菜单栏设置
-        menu = self.menuBar().addMenu('账号中心')
+        menu = self.menuBar().addMenu('应用操作')
 
         signoutAct = QAction('注销', self) 
         signoutAct.triggered.connect(self.onSignout)
@@ -258,7 +261,7 @@ class PA_MainWindow(QMainWindow):
         self.setCentralWidget(PA_CenterWidget(self))
 
         # 菜单栏设置
-        menu = self.menuBar().addMenu('账号中心')
+        menu = self.menuBar().addMenu('应用操作')
 
         signoutAct = QAction('注销', self)
         signoutAct.triggered.connect(self.onSignout)
@@ -299,8 +302,11 @@ class PA_MainWindow(QMainWindow):
 def main():
     
     app = QApplication(sys.argv)
+
+
     loginWindow = login.LoginWindow()
     registerWindow = register.RegisterWindow()
+    testWindow = test.MainWindow()
 
     el_mainWindow = EL_MainWindow()
     pa_mainWindow = PA_MainWindow()
@@ -310,6 +316,7 @@ def main():
     # mainWindow.loginWindow = loginWindow
     registerWindow.loginWindow = loginWindow
     loginWindow.registerWindow = registerWindow
+    loginWindow.testWindow = testWindow
 
     vPatternWindow.EL_MainWindow = el_mainWindow
     vPatternWindow.PA_MainWindow = pa_mainWindow
@@ -317,6 +324,8 @@ def main():
 
     loginWindow.show()
     sys.exit(app.exec_())
+
+
 
 if __name__=="__main__":
     main()

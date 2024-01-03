@@ -11,13 +11,15 @@ from PyQt5.QtWidgets import (QWidget, QWidget, QLabel, QLineEdit,
                         QGridLayout, QVBoxLayout, QHBoxLayout,
                         QFrame, QMessageBox, QPushButton,
                         QApplication)
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtGui import QFont, QIcon, QPixmap, QBrush, QPalette, QImage
 
 import util
 
 import os 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/'+'..')) #当前python程序所在目录的父目录的绝对路径加入到环境变量PYTHON_PATH中
 from Database.util import login # PYTHON_PATH是python的搜索路径，再引入模块时就可以从父目录中搜索得到了
+
+from Test import test
 
 class LoginWindow(QWidget):
 
@@ -27,33 +29,44 @@ class LoginWindow(QWidget):
         self.pa_mainWindow = None
         self.registerWindow = None
         self.patternWindow = None
+        self.testWindow = None
+        
+       
+        
         self.initUI()
 
     def initUI(self): 
-        
+        # Load the login logo
         logomap = QPixmap('./image/signin.png')
 
+        # Create a label to display the logo
         logolbl = QLabel(self)
         logolbl.setPixmap(logomap)
-        logolbl.setScaledContents(True) # 图片自适应标签大小
+        logolbl.setScaledContents(True)  # Allow the image to adapt to the label size
 
-        title = QLabel('Evote—电子投票系统')
+        # Create a label for the additional image on the left side
+        leftImage = QLabel(self)
+        leftImage.setPixmap(QPixmap('../image/Paimon.png'))
+        leftImage.setScaledContents(True)  # Allow the image to adapt to the label size
+
+        # Create a title label for the login window
+        title = QLabel('同态加密投票系统')
         title.setAlignment(Qt.AlignCenter)
         title.setFont(QFont("Microsoft YaHei", 15))
 
+        # Create labels for username and password
         user = QLabel('账号: ')
         pwd = QLabel('密码: ')
 
-        user = QLabel('账号: ')
-        pwd = QLabel('密码: ')
-
+        # Create input fields for username and password
         self.userInput = QLineEdit()
         self.userInput.setPlaceholderText('请输入用户名')
 
         self.pwdInput = QLineEdit()
         self.pwdInput.setPlaceholderText('请输入密码')
-        self.pwdInput.setEchoMode(QLineEdit.Password) #密码不以明文显示
+        self.pwdInput.setEchoMode(QLineEdit.Password)  # Hide the password characters
 
+        # Create login, register, and test buttons
         self.loginButton = QPushButton('登录', self)
         self.loginButton.setIcon(QIcon('./image/start.png'))
         self.loginButton.clicked.connect(self.onLogin)
@@ -62,6 +75,13 @@ class LoginWindow(QWidget):
         self.registerButton.setFont(QFont('黑体'))
         self.registerButton.setIcon(QIcon('./image/register.png'))
         self.registerButton.clicked.connect(self.onRegister)
+
+        self.testButton = QPushButton('测试', self)
+        self.testButton.clicked.connect(self.onTest)
+
+        # Create layouts for the left and right sides of the window
+        leftLayout = QVBoxLayout()
+        leftLayout.addWidget(leftImage)
 
         rightcenterLayout = QGridLayout()
         rightcenterLayout.addWidget(user, 0, 0, 1, 1)
@@ -76,26 +96,29 @@ class LoginWindow(QWidget):
         rightdownLayout = QHBoxLayout()
         rightdownLayout.addWidget(self.loginButton)
         rightdownLayout.addWidget(self.registerButton)
+        rightdownLayout.addWidget(self.testButton)
 
         rightLayout = QVBoxLayout()
         rightLayout.addWidget(title)
         rightLayout.addWidget(rightcenterFrame)
         rightLayout.addLayout(rightdownLayout)
 
-        totalLayut = QHBoxLayout()
-        totalLayut.addWidget(logolbl)
-        totalLayut.addLayout(rightLayout)
+        # Create the main layout for the entire window
+        totalLayout = QHBoxLayout()
+        totalLayout.addLayout(leftLayout)
+        totalLayout.addLayout(rightLayout)
 
-        self.setLayout(totalLayut)
-        self.resize(480, 200)
-        util.center(self) 
+        # Set the main layout for the window and adjust the window properties
+        self.setLayout(totalLayout)
+        self.resize(600, 200)  # Adjusted width to accommodate the left image
+        util.center(self)
         self.setFont(QFont('宋体', 12))
         self.setWindowTitle('登录')
-        self.setWindowIcon(QIcon('./image/car.png'))
+        self.setWindowIcon(QIcon('../image/car.png'))
 
-        self.setWindowFlags(Qt.FramelessWindowHint)  # 去边框
-        # self.setAttribute(Qt.WA_TranslucentBackground)  # 设置窗口背景透明
-
+        # Remove window frame and set window background as translucent (optional)
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        # self.setAttribute(Qt.WA_TranslucentBackground)
         button_red = QPushButton(self)
         button_red.move(20, 20)
         button_red.setFixedSize(20, 20)
@@ -191,6 +214,10 @@ class LoginWindow(QWidget):
             self.pwdInput.clear()
             self.close()
             self.registerWindow.show() 
+
+    def onTest(self):
+        self.testWindow.show()
+
 
 if __name__ == "__main__":
     

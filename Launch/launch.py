@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 import sys
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import Qt, QFileInfo
-from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit,
-                             QGridLayout, QVBoxLayout, QHBoxLayout,
+from PyQt5.QtCore import Qt, QFileInfo, QSize
+from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit, QVBoxLayout, QHBoxLayout,
                              QFrame, QMessageBox, QPushButton,
                              QTextEdit,
                              QTableWidget,
                              QApplication)
 from PyQt5.QtGui import QIntValidator
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt5.QtGui import QFont, QIcon
 import sip
 
 import os
@@ -29,7 +28,9 @@ class EL_LaunchWindow(QWidget):
     def __init__(self, usr=None):
         super().__init__()
         self.usr = usr
+        self.setFixedSize(970,1023)
         self.initUI()
+        
 
     def initUI(self):
         # 获取根路径
@@ -318,6 +319,7 @@ class PA_LaunchWindow(QWidget):
     def __init__(self, usr=None):
         super().__init__()
         self.usr = usr
+        self.setFixedSize(970,1023)
         self.initUI()
 
     def initUI(self):
