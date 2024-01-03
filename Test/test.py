@@ -1,5 +1,4 @@
 import sys
-from time import sleep
 sys.path.append("..")
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QDialog, QHBoxLayout
 from PyQt5.QtCore import QTimer

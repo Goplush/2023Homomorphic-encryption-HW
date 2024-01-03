@@ -88,9 +88,6 @@ class RegisterWindow(QWidget):
 
 
 
-
-    def onRegister(self):
-        print(233)
     
     def onLogin(self):
         if self.loginWindow is not None:
