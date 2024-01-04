@@ -143,7 +143,7 @@ class EL_Voteview(QWidget):
             QMessageBox.information(self, '提示', '您已取消本次加密', QMessageBox.Yes)
             return None
         C = pubkey.encrypt_int(m)
-        updateTotal(self.captcha, pubkey, C)
+        updateTotal(self.captcha, pubkey, C, 1  )
         votenum = int(self.voteuseLine.text()) - cnt
         updataUsrRecord(self.captcha, self.usr, votenum)
         self.getVotenum()
@@ -247,7 +247,7 @@ class PA_Voteview(QWidget):
             QMessageBox.warning(self, 'warning', '这只是一个预览效果', QMessageBox.Yes)
             return
         if int(self.voteuseLine.text()) == 0:
-            QMessageBox.information(self, 'soryy', '您的投票次数已经用光', QMessageBox.Yes)
+            QMessageBox.information(self, 'sorry', '您的投票次数已经用光', QMessageBox.Yes)
             return None
         cnt = 0
         m = 1
@@ -271,8 +271,7 @@ class PA_Voteview(QWidget):
         if pubkey == False:
             QMessageBox.information(self, '提示', '您已取消本次加密', QMessageBox.Yes)
             return None
-        C = pubkey.encrypt_int(m)
-        updateTotal(self.captcha, pubkey, C)
+        updateTotal(self.captcha, pubkey, m, 0)
         votenum = int(self.voteuseLine.text()) - cnt
         updataUsrRecord(self.captcha, self.usr, votenum)
         self.getVotenum()

@@ -66,6 +66,10 @@ class PaillierPublicKey(object):
         cipher = gmpy2.f_mod(gmpy2.mul(gmpy2.powmod(self.g, m, self.n_sq), x), self.n_sq)
         return cipher
 
+    def enc_mul_const(pub, m, c):
+        """Multiply an encrypted integer by a constant"""
+        return powmod(m, c, pub.n_sq)
+
     def evaluate_int(self, C1, C2):
         '''
         # 功能：实现两个密文间的同态加法

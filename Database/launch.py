@@ -145,17 +145,23 @@ def getTotal(captcha):
                 return int(y)
 
 
-def updateTotal(captcha, pubkey, C2):
+def updateTotal(captcha, pubkey, C2, mode):
     '''
     # 功能：更新记录captcha对应的投票总数
-    # 接受参数：captcha(邀请码), pubkey(公钥), C2(int)
+    # 接受参数：captcha(邀请码), pubkey(公钥), C2(int), mode:0-pai && 1-elg
     # 返回参数：
     '''
     C1 = getTotal(captcha)
-    C = pubkey.evaluate_int(C1, C2)
-    if type(C) == tuple:
-        C = str(C[0]) + ',' + str(C[1])
-    C = str(C)
+    if mode == 1:
+        C = pubkey.evaluate_int(C1, C2)
+        if type(C) == tuple:
+            C = str(C[0]) + ',' + str(C[1])
+        C = str(C)
+    else:
+        C = pubkey.enc_mul_const(C1,C2)
+        if type(C) == tuple:
+            C = str(C[0]) + ',' + str(C[1])
+        C = str(C)
     sql = "update launch set total = '{}' where captcha = '{}'".format(C, captcha)
     flag, res = op_mysql(sql)
     if flag == False:

@@ -82,6 +82,8 @@ class PA_KeyGenWindow(QWidget):
 
     def onConfirm(self):
         keysize = self.keysizeInput.text()
+        if keysize is '':
+            keysize = '1024'
         keysize = int(keysize)
         if keysize == 0:
             QMessageBox.warning(self, 'warning', '密钥长度不能为零', QMessageBox.Yes)

@@ -260,7 +260,7 @@ class EL_LaunchWindow(QWidget):
             data = []
             for i in range(self.rownum):
                 data.append([self.tabledata[i][0], primes[i]])
-            reply = QMessageBox.question(self, '询问', '确认保存?',
+            reply = QMessageBox.question(self, '询问', '确认保存?\n如确认请准备打开公钥',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
             if reply == QMessageBox.Yes:
                 s = self.usr + title + str(votelimit)
@@ -550,7 +550,7 @@ class PA_LaunchWindow(QWidget):
             data = []
             for i in range(self.rownum):
                 data.append([self.tabledata[i][0], primes[i]])
-            reply = QMessageBox.question(self, '询问', '确认保存?',
+            reply = QMessageBox.question(self, '询问', '确认保存? \n如确认请准备打开公钥',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
             if reply == QMessageBox.Yes:
                 s = self.usr + title + str(votelimit)
