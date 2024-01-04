@@ -45,18 +45,12 @@ class TestDialog(QDialog):
                 dialog.addButton(yes_button, QMessageBox.YesRole)
                 dialog.addButton(no_button, QMessageBox.NoRole)
 
-                result = dialog.exec_()
+                yes_button.clicked.connect(test)
 
-                if result == QMessageBox.YesRole:
-                    print("用户选择了是")
-                    return True
-                else:
-                    print("用户选择了否")
-                    return False
-            if show_confirmation_dialog():
-                test()
-            else:
-                return
+                no_button.clicked.connect(dialog.close)
+                dialog.exec_()
+
+            show_confirmation_dialog()
 
         self.label.setText("测试完毕，测试结果请查看日志")
         self.ok_button.setDisabled(False)
